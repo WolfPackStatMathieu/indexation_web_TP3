@@ -1,26 +1,7 @@
-import json
 
-def load_documents():
-    with open('documents.json', 'r', encoding='utf-8') as file:
-        return json.load(file)
-
-def load_index():
-    with open('title_pos_index.json', 'r', encoding='utf-8') as file:
-        return json.load(file)
-
-def tokenize_query(query):
-    return [token.lower() for token in query.split()]
-
-def search_documents(query, documents, index):
-    tokens = tokenize_query(query)
-    
-    matching_documents = set(str(doc['id']) for doc in documents)
-    
-    for token in tokens:
-        if token in index:
-            matching_documents &= set(str(doc_id) for doc_id in index[token].keys())
-        
-    return matching_documents
+from load_documents import load_documents
+from load_index import load_index
+from search_documents import search_documents
 
 def main():
     documents = load_documents()

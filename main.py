@@ -14,12 +14,12 @@ def tokenize_query(query):
 def search_documents(query, documents, index):
     tokens = tokenize_query(query)
     
-    matching_documents = set(doc['id'] for doc in documents)
+    matching_documents = set(str(doc['id']) for doc in documents)
     
     for token in tokens:
         if token in index:
-            matching_documents &= set(index[token]['docid'].keys())
-    
+            matching_documents &= set(str(doc_id) for doc_id in index[token].keys())
+        
     return matching_documents
 
 def main():

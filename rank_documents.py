@@ -48,3 +48,24 @@ def rank_documents(documents, query, index):
     # Convertir les identifiants de documents en entiers, si nécessaire, et les retourner
     return [int(doc_id) for doc_id in ranked_doc_ids if scores[doc_id] > 0]
 
+from tokenize_query import tokenize_query
+from load_documents import load_documents
+from load_index import load_index
+
+if __name__ == "__main__":
+    # Charger les documents et l'index à partir de fichiers JSON ou d'une autre source
+    documents = load_documents()  # Supposons que cette fonction retourne une liste de dictionnaires de documents
+    index = load_index()  # Supposons que cette fonction retourne un dictionnaire représentant l'index
+
+    # Définir une requête de test
+    query = "exemple de requête"
+
+    # Appeler rank_documents pour obtenir les documents classés par pertinence
+    ranked_documents = rank_documents(documents, query, index)
+
+    # Afficher les résultats
+    print("Documents classés par pertinence :")
+    for doc_id in ranked_documents:
+        print(f"ID du document: {doc_id}")
+        # Vous pouvez également afficher d'autres détails du document, comme le titre, si vous le souhaitez
+        print(f"Titre: {next(doc for doc in documents if doc['id'] == doc_id)['title']}")

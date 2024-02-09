@@ -43,7 +43,7 @@ if __name__ == "__main__":
         # Ajoutez d'autres tokens et positions au besoin
     }
 
-    query_example = "token1"
+    query_example = "token2"
     result = search_documents(query_example, documents_example, index_example)
 
     print("Documents correspondants :", result)

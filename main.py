@@ -1,5 +1,6 @@
 from load_documents import load_documents
 from load_index import load_index
+from rank_documents import rank_documents
 from search_documents import search_documents
 
 def main():
@@ -22,5 +23,7 @@ def main():
     else:
         print("Aucun document ne correspond à la requête.")
 
+    ranked_documents = rank_documents(documents=matching_documents, query= user_query, index=index)
+    
 if __name__ == "__main__":
     main()

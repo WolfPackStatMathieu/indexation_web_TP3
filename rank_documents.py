@@ -17,11 +17,12 @@ def rank_documents(documents, query, index):
     query_tokens = tokenize_query(query)
     scores = {} # initialisation des scores
 
-    for doc in documents:
+    for doc in documents: # pour chaque document filtré
         doc_id = str(doc['id'])
         doc_score = 0
         
         # on cherche un par un dans les tokens issus de la requete
+        # ex: query_tokens = ['loi']
         for token in query_tokens: 
             # Si le token est présent parmi les token indexes et que l'id du
             # document est présent dans le dictionnaire du token

@@ -9,8 +9,8 @@ def main():
     index = load_index()
 
     # Exemple de requête (commentez la ligne ci-dessus et décommentez la suivante pour une entrée utilisateur)
-    # user_query = input("Entrez votre requête : ")
-    user_query = "cannabis"
+    user_query = input("Entrez votre requête : ")
+    # user_query = "cannabis baron"
     
     # Rechercher les documents correspondants à la requête
     matching_documents = search_documents(user_query, documents, index)
@@ -24,6 +24,22 @@ def main():
         print("Aucun document ne correspond à la requête.")
 
     ranked_documents = rank_documents(documents=matching_documents, query= user_query, index=index)
+    
+    
+    
+    print("------ METRIQUES ------")
+    print(f"Requête = {user_query}")
+    # On cherche le nombre de documents dans l'index (chaque token peut faire référence à plusieurs documents
+    # donc on doit faire attention aux doublons, donc on utilise un set)
+    id = set()
+    for token, value in index.items():
+        for key, value in index[token].items():
+            id.add(key)
+    print(f"Nombre de documents dans l'index: {len(id)}")        
+    
+    
+    # Nombre de documents qui ont survécu au filtre
+    print(f"Nombre de documents qui ont survécu au filtre : {len(matching_documents)}")
     
 if __name__ == "__main__":
     main()

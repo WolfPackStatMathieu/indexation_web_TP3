@@ -1,9 +1,19 @@
+"""search_documents commence 
+par créer un ensemble pour chaque token de la requête 
+qui contient les ID des documents où le token apparaît.
+Ensuite, elle utilise set.intersection pour trouver 
+l'intersection de tous ces ensembles, ce qui garantit 
+que seuls les documents contenant tous les tokens de la 
+requête sont conservés. Si aucun token de la requête 
+n'est trouvé dans l'index, la fonction retourne un ensemble 
+vide, indiquant qu'aucun document ne correspond à la requête.
+"""
 from tokenize_query import tokenize_query
-
 
 def search_documents(query, documents, index):
     """
-    Recherche les documents correspondants à une requête en utilisant un index de position des tokens.
+    Recherche les documents correspondants à une requête en utilisant un index de position des tokens,
+    en s'assurant que tous les tokens de la requête sont présents dans les documents.
 
     Parameters:
         query (str): La requête de l'utilisateur.
@@ -13,20 +23,18 @@ def search_documents(query, documents, index):
     Returns:
         set: Un ensemble des identifiants des documents qui correspondent à tous les tokens de la requête.
     """
-    # Tokeniser la requête de l'utilisateur
     tokens = tokenize_query(query)
+    
+    # Utiliser un ensemble pour stocker les ID de documents correspondant à chaque token
+    token_doc_ids = [set(index[token].keys()) for token in tokens if token in index]
 
-    # Initialiser l'ensemble des documents correspondants avec tous les documents disponibles
-    matching_documents = set(str(doc['id']) for doc in documents)
+    # Trouver l'intersection de tous ces ensembles pour s'assurer que tous les tokens sont présents
+    if token_doc_ids:
+        matching_documents = set.intersection(*token_doc_ids)
+    else:
+        # Si aucun token n'est trouvé dans l'index, aucun document ne correspond
+        matching_documents = set()
 
-    # Parcourir chaque token de la requête
-    for token in tokens:
-        # Vérifier si le token est présent dans l'index
-        if token in index:
-            # Mettre à jour l'ensemble des documents correspondants en ne conservant que ceux ayant le token actuel
-            matching_documents &= set(str(doc_id) for doc_id in index[token].keys())
-
-    # Renvoyer l'ensemble final des documents correspondants à la requête
     return matching_documents
 
 if __name__ == "__main__":
@@ -43,7 +51,7 @@ if __name__ == "__main__":
         # Ajoutez d'autres tokens et positions au besoin
     }
 
-    query_example = "token2"
+    query_example = "token1 token2"
     result = search_documents(query_example, documents_example, index_example)
 
     print("Documents correspondants :", result)

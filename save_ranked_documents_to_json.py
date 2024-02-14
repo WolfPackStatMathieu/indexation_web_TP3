@@ -3,6 +3,7 @@ import json
 from load_documents import load_documents
 from load_index import load_index
 from rank_documents import rank_documents
+from search_documents import search_documents
 
 def save_ranked_documents_to_json(ranked_doc_ids, documents, file_name="results.json"):
     """
@@ -34,7 +35,9 @@ if __name__ == "__main__":
     documents = load_documents()  # Chargez vos documents ici
     index = load_index()  # Chargez votre index ici
     query = "danse classique"
-    ranked_doc_ids = rank_documents(documents, query, index)
+    matching_documents = search_documents(query, documents, index)
+
+    ranked_doc_ids = rank_documents(matching_documents, query, index)
 
     # Enregistrez les documents classés dans un fichier JSON
     save_ranked_documents_to_json(ranked_doc_ids, documents)

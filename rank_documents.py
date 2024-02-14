@@ -7,7 +7,7 @@ def rank_documents(documents, query, index):
     basée sur la fréquence des tokens et leur position moyenne dans les documents.
 
     Parameters:
-        documents (list): La liste des documents chargés par load_documents.
+        documents (list): La liste des id des documents chargés par load_documents.
         query (str): La requête de l'utilisateur.
         index (dict): L'index des positions des tokens dans les documents, chargé par load_index.
 
@@ -17,8 +17,8 @@ def rank_documents(documents, query, index):
     query_tokens = tokenize_query(query)
     scores = {} # initialisation des scores
 
-    for doc in documents: # pour chaque document filtré
-        doc_id = str(doc['id'])
+    for id in documents: # pour chaque document filtré
+        doc_id = id #str(doc['id'])
         doc_score = 0
         
         # on cherche un par un dans les tokens issus de la requete

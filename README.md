@@ -1,5 +1,41 @@
 # indexation_web_TP3
 
+
+Ce projet est un système simple de recherche de documents qui permet aux utilisateurs de charger un ensemble de documents et un index, d'entrer une requête de recherche, et d'obtenir une liste de documents correspondants classés par pertinence.
+
+## Fonctionnalités
+
+- Chargement de documents et d'un index depuis des sources prédéfinies.
+- Saisie de requêtes de recherche par l'utilisateur.
+- Recherche de documents correspondant à la requête.
+- Classement des documents trouvés selon leur pertinence par rapport à la requête.
+- Affichage des métriques liées à la recherche.
+
+## Prérequis
+
+Pour exécuter ce script, vous aurez besoin de Python 3.x installé sur votre machine. Aucune dépendance externe n'est requise pour les fonctionnalités de base décrites ici.
+
+## Installation
+
+Clonez ce dépôt sur votre machine locale en utilisant la commande suivante :
+
+```bash
+git clone https://github.com/WolfPackStatMathieu/indexation_web_TP3.git
+cd TP3
+```
+
+## Utilisation
+
+Pour exécuter le script, naviguez dans le répertoire du projet et exécutez :
+
+```bash
+python main.py
+```
+
+Lors de l'exécution, le script vous invite à entrer une requête de recherche. Entrez votre requête et appuyez sur `Entrée` pour voir les résultats.
+
+
+
 ## Calcul du Score de Pertinence
 
 La formule pour calculer le score de pertinence d'un document, basé sur la position des tokens et leur fréquence, est décrite ci-dessous. Ce score est utilisé pour évaluer la pertinence des documents par rapport à une requête utilisateur.
